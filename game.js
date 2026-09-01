@@ -94,7 +94,14 @@ cards.forEach(cardImage => {
     frontImage.src = "images/" + cardImage;
 
     const backImage = document.createElement("img");
-    backImage.src = "images/back_dark.png";
+
+    const selectedCardBack = localStorage.getItem("cardBack") || "dark";
+
+    if (selectedCardBack === "white") {
+        backImage.src = "images/back_light.png";
+    } else {
+        backImage.src = "images/back_dark.png";
+    }
 
     front.appendChild(frontImage);
     back.appendChild(backImage);
@@ -143,16 +150,4 @@ cards.forEach(cardImage => {
     });
 
     gameBoard.appendChild(card);
-});
-
-const themeToggle = document.getElementById("theme-toggle");
-
-themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-
-    if (document.body.classList.contains("dark")) {
-        themeToggle.textContent = "☀️ Light Mode";
-    } else {
-        themeToggle.textContent = "🌙 Dark Mode";
-    }
 });
